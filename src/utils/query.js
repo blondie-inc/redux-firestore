@@ -147,7 +147,7 @@ export function firestoreRef(firebase, meta) {
  */
 function wherePartToStr(wherePart) {
   return isObject(wherePart)
-    ? wherePart.path
+    ? wherePart.path // eslint-skip-line prettier/prettier
     : wherePart;
 }
 
