@@ -141,13 +141,24 @@ export function firestoreRef(firebase, meta) {
 }
 
 /**
+ * Convert part of where parameter into a string notation for use in query name
+ * @param  {String} wherePart - Part of where parameter
+ * @return {String} String representing where settings for use in query name
+ */
+function wherePartToStr(wherePart) {
+  return isObject(wherePart)
+    ? wherePart.path
+    : wherePart;
+}
+
+/**
  * Convert where parameter into a string notation for use in query name
  * @param  {Array} where - Where config array
  * @return {String} String representing where settings for use in query name
  */
 function whereToStr(where) {
   return isString(where[0])
-    ? `where=${where.join(':')}`
+    ? `where=${where.map(wherePartToStr).join(':')}`
     : where.map(whereToStr);
 }
 
